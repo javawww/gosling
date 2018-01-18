@@ -1,0 +1,513 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<name>gosling-controller Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.gosling</groupId>
+		<artifactId>gosling</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>gosling-controller</artifactId>
+	<packaging>war</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>6</maven.compiler.source>
+		<maven.compiler.target>6</maven.compiler.target>
+		<skipTest>true</skipTest>
+
+		<version-maven-source-plugin>2.2.1</version-maven-source-plugin>
+		<version-maven-javadoc-plugin>2.9</version-maven-javadoc-plugin>
+		<version-maven-compiler-plugin>3.1</version-maven-compiler-plugin>
+		<version-maven-surefire-plugin>2.14.1</version-maven-surefire-plugin>
+
+
+		<version-mybatis>3.2.7</version-mybatis>
+		<version-mysql-connector>5.1.24</version-mysql-connector>
+		<version-druid>1.0.14</version-druid>
+		<version-mybatis-spring>1.2.0</version-mybatis-spring>
+
+		<version-cglib>2.2.2</version-cglib>
+		<version-spring>4.2.2.RELEASE</version-spring>
+
+		<!--jackson -->
+		<version-jackson-mapper-asl>1.9.13</version-jackson-mapper-asl>
+		<version-jackson-databind>2.3.1</version-jackson-databind>
+		<version-jackson-module-jaxb-annotations>2.1.0</version-jackson-module-jaxb-annotations>
+
+		<freemarker.version>2.3.19</freemarker.version>
+		<version-servlet-api>3.0.1</version-servlet-api>
+		<version-jsp-api>2.0</version-jsp-api>
+
+		<version-log4j>1.2.17</version-log4j>
+		<version-slf4j>1.7.2</version-slf4j>
+
+		<version-commons-fileupload>1.2.2</version-commons-fileupload>
+		<version-commons-logging>1.2</version-commons-logging>
+		<version-commons-io>2.4</version-commons-io>
+		<version-beanutils>1.9.2</version-beanutils>
+
+		<version-junit>4.10</version-junit>
+
+		<version-fastjson>1.2.6</version-fastjson>
+		<version-gson>2.2.2</version-gson>
+
+		<shiro-version>1.2.4</shiro-version>
+
+		<solr-version>5.3.1</solr-version>
+
+		<javax-mail-api>1.5.1</javax-mail-api>
+		<javax-mail>1.5.2</javax-mail>
+
+		<com-google-zxing>3.2.1</com-google-zxing>
+	</properties>
+
+	<dependencies>
+		<!-- gosling-service -->
+		<dependency>
+			<groupId>com.gosling</groupId>
+			<artifactId>gosling-service</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<!-- database -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>${version-mybatis}</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${version-mysql-connector}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>${version-mybatis-spring}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.mybatis</groupId>
+					<artifactId>mybatis</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-tx</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>${version-druid}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>${version-cglib}</version>
+		</dependency>
+		<!-- spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${version-spring}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${version-spring}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${version-spring}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+			<version>${version-spring}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${version-spring}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${version-spring}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${version-spring}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${version-spring}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${version-spring}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${version-spring}</version>
+		</dependency>
+
+		<!--jackson -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${version-jackson-mapper-asl}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${version-jackson-databind}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.module</groupId>
+			<artifactId>jackson-module-jaxb-annotations</artifactId>
+			<version>${version-jackson-module-jaxb-annotations}</version>
+		</dependency>
+
+		<!-- web -->
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>${freemarker.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${version-servlet-api}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>${version-jsp-api}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- log -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${version-log4j}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${version-slf4j}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${version-slf4j}</version>
+		</dependency>
+
+		<!-- commons -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>${version-commons-fileupload}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>${version-commons-logging}</version>
+		</dependency>
+		<!--<dependency> -->
+		<!--<groupId>commons-dbcp</groupId> -->
+		<!--<artifactId>commons-dbcp</artifactId> -->
+		<!--<version>1.4</version> -->
+		<!--</dependency> -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${version-commons-io}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>${version-beanutils}</version>
+		</dependency>
+
+		<!--test -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
+			<version>${version-spring}</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${version-junit}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${version-fastjson}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>${version-gson}</version>
+		</dependency>
+
+		<!-- gson -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.4</version>
+		</dependency>
+
+		<!-- dom4j -->
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.4.1</version>
+		</dependency>
+
+		<!-- shiro -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<version>${shiro-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>${shiro-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-ehcache</artifactId>
+			<version>${shiro-version}</version>
+		</dependency>
+
+		<!-- solr -->
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-solrj</artifactId>
+			<version>${solr-version}</version>
+		</dependency>
+
+		<!-- email -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+			<version>${javax-mail-api}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>${javax-mail}</version>
+		</dependency>
+
+		<!-- 二维码生成器 -->
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>${com-google-zxing}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.swinglabs/swingx -->
+		<dependency>
+			<groupId>org.swinglabs</groupId>
+			<artifactId>swingx</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<finalName>gosling-controller</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>9.3.0.M2</version>
+				<configuration>
+					<webAppConfig>
+						<contextPath>/</contextPath>
+					</webAppConfig>
+					<httpConnector>
+						<port>80</port>
+						<idleTimeout>10000</idleTimeout>
+					</httpConnector>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${version-maven-compiler-plugin}</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<skip>${skipTest}</skip>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>${version-maven-source-plugin}</version>
+				<executions>
+					<execution>
+						<id>bundle-sources</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${version-maven-javadoc-plugin}</version>
+				<configuration>
+					<quiet>true</quiet>
+					<failOnError>false</failOnError>
+					<stylesheet>maven</stylesheet>
+					<tags>
+						<tag>
+							<name>Author</name>
+							<placement>a</placement>
+							<head>Author</head>
+						</tag>
+						<tag>
+							<name>Date</name>
+							<placement>a</placement>
+							<head>Date</head>
+						</tag>
+						<tag>
+							<name>Version</name>
+							<placement>a</placement>
+							<head>Version</head>
+						</tag>
+						<tag>
+							<name>Email</name>
+							<placement>a</placement>
+							<head>Email</head>
+						</tag>
+					</tags>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${version-maven-surefire-plugin}</version>
+				<configuration>
+					<skip>${skipTest}</skip>
+				</configuration>
+			</plugin>
+			<!-- 解决Maven插件在Eclipse内执行了一系列的生命周期引起冲突 -->
+			<plugin>
+				<groupId>org.eclipse.m2e</groupId>
+				<artifactId>lifecycle-mapping</artifactId>
+				<version>1.0.0</version>
+				<configuration>
+					<lifecycleMappingMetadata>
+						<pluginExecutions>
+							<pluginExecution>
+								<pluginExecutionFilter>
+									<groupId>org.apache.maven.plugins</groupId>
+									<artifactId>maven-dependency-plugin</artifactId>
+									<versionRange>[2.0,)</versionRange>
+									<goals>
+										<goal>copy-dependencies</goal>
+									</goals>
+								</pluginExecutionFilter>
+								<action>
+									<ignore />
+								</action>
+							</pluginExecution>
+						</pluginExecutions>
+					</lifecycleMappingMetadata>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<profiles>
+		<!-- 测试环境 -->
+		<profile>
+			<id>dev</id>
+			<properties>
+				<!-- 地址信息 -->
+				<url.resources>http://127.0.0.1</url.resources>
+				<static.resources>http://127.0.0.1/resources</static.resources>
+				<image.resources>http://127.0.0.1:8088</image.resources>
+
+				<!-- 数据库信息 -->
+				<jdbc.url>jdbc:mysql://127.0.0.1:3306/blog</jdbc.url>
+				<jdbc.username>root</jdbc.username>
+				<jdbc.password>123456</jdbc.password>
+
+				<!-- 日志信息 -->
+				<log.file>D:/logs/controller.log</log.file>
+				<log.level>INFO</log.level>
+			</properties>
+		</profile>
+		<!-- 生产环境 -->
+		<profile>
+			<id>prd</id>
+			<properties>
+				<!-- 地址信息 -->
+				<url.resources>http://127.0.0.1</url.resources>
+				<static.resources>http://127.0.0.1/resources</static.resources>
+				<image.resources>http://127.0.0.1:8088</image.resources>
+
+				<!-- 数据库信息 -->
+				<jdbc.url>jdbc:mysql://127.0.0.1:3306/blog</jdbc.url>
+				<jdbc.username>root</jdbc.username>
+				<jdbc.password>123456</jdbc.password>
+
+				<!-- 日志信息 -->
+				<log.file>/logs/controller.log</log.file>
+				<log.level>ERROR</log.level>
+			</properties>
+		</profile>
+	</profiles>
+</project>
