@@ -27,7 +27,11 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
     
+    <!-- 数据库 -->
 	<import resource="spring-datasources.xml"/>
+	<!-- 定时器 -->
+	<!-- <import resource="spring-quartz-task.xml"/> -->
+	
 	<!-- -->
 	<bean id="domainUrlUtil" class="com.gosling.util.freemarkerutil.DomainUrlUtil">
 		<property name="URL_RESOURCES" value="${url.resources}" />

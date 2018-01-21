@@ -1,4 +1,4 @@
-package ${bussiPackage}.controller.${entityPackage};
+package com.gosling.controller.classify;
 
 import java.util.Map;
 
@@ -15,25 +15,25 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gosling.controller.BaseController;
 import com.gosling.core.ResultCode;
 
-import ${bussiPackage}.entity.${entityPackage}.${entityName};
-import ${bussiPackage}.service.${entityPackage}.${entityName}Service;
+import com.gosling.entity.classify.Classify;
+import com.gosling.service.classify.ClassifyService;
 
 /**
  * 
- * @类描述：${ftl_description}
+ * @类描述：文章分类
  * @项目名称：gosling-controller
- * @包名：${bussiPackage}.controller.${entityPackage}
- * @类名称：${entityName}Controller
+ * @包名：com.gosling.controller.classify
+ * @类名称：ClassifyController
  * @创建人：快敲网络出品-技术交流请移步Q群：327947585
- * @创建时间：${.now}
+ * @创建时间：2018-1-21 13:58:38
  */
 @Controller
-@RequestMapping(value = "${entityName?uncap_first}")
-public class ${entityName}Controller extends BaseController {
+@RequestMapping(value = "classify")
+public class ClassifyController extends BaseController {
 
 	/***注入业务service层*/
 	@Resource
-	private ${entityName}Service							${entityName?uncap_first}Service;
+	private ClassifyService							classifyService;
 	
 	/***静态链接*/
 	public static final String LIST = "list.html";//列表页面
@@ -43,42 +43,42 @@ public class ${entityName}Controller extends BaseController {
 	public static final String UPDATE = "update.html";//更新操作
 	
 	/**
-	 * ${ftl_description}列表 页面跳转
+	 * 文章分类列表 页面跳转
 	 * @param request
 	 * @param response
 	 * @param dataMap
 	 * @return
 	 */
-	@RequestMapping(value = ${entityName}Controller.LIST,method = {RequestMethod.GET })
+	@RequestMapping(value = ClassifyController.LIST,method = {RequestMethod.GET })
 	public ModelAndView list(HttpServletRequest request, HttpServletResponse response,
             Map<String, Object> dataMap){
-		return new ModelAndView("${entityPackage}/list");
+		return new ModelAndView("classify/list");
 	}
 	
 	/**
-	 * ${ftl_description}新增页面跳转
+	 * 文章分类新增页面跳转
 	 * @param request
 	 * @param dataMap
 	 * @return
 	 */
-	@RequestMapping(value = ${entityName}Controller.ADD,method = {RequestMethod.GET })
+	@RequestMapping(value = ClassifyController.ADD,method = {RequestMethod.GET })
 	public ModelAndView add(HttpServletRequest request, Map<String, Object> dataMap) {
-		return new ModelAndView("${entityPackage}/add");
+		return new ModelAndView("classify/add");
 	}
 	
 	/**
-	 * 添加${ftl_description}
+	 * 添加文章分类
 	 * @param member
 	 * @param request
 	 * @param dataMap
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = ${entityName}Controller.CREATE, method = { RequestMethod.POST })
+	@RequestMapping(value = ClassifyController.CREATE, method = { RequestMethod.POST })
     @ResponseBody
-    public ResultCode<Object> create(${entityName} ${entityName?uncap_first}, HttpServletRequest request,
+    public ResultCode<Object> create(Classify classify, HttpServletRequest request,
                                          Map<String, Object> dataMap) {
-		Integer code = ${entityName?uncap_first}Service.insert(${entityName?uncap_first});
+		Integer code = classifyService.insert(classify);
 		if(code==1){
 			return ResultCode.newRightCode("添加成功");
 		}else{
@@ -87,30 +87,30 @@ public class ${entityName}Controller extends BaseController {
 	}
 	
 	/**
-	 * ${ftl_description}编辑页面跳转
+	 * 文章分类编辑页面跳转
 	 * @param request
 	 * @param id
 	 * @param dataMap
 	 * @return
 	 */
-	@RequestMapping(value = ${entityName}Controller.EDIT, method = { RequestMethod.GET })
+	@RequestMapping(value = ClassifyController.EDIT, method = { RequestMethod.GET })
     public ModelAndView edit(HttpServletRequest request, Integer id, Map<String, Object> dataMap){
-		${entityName} ${entityName?uncap_first} = ${entityName?uncap_first}Service.getById(id);
-		dataMap.put("${entityName?uncap_first}", ${entityName?uncap_first});
-		return new ModelAndView("${entityPackage}/edit");
+		Classify classify = classifyService.getById(id);
+		dataMap.put("classify", classify);
+		return new ModelAndView("classify/edit");
 	}
 	
 	/**
-	 * 更新${ftl_description}
+	 * 更新文章分类
 	 * @param member
 	 * @param request
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = ${entityName}Controller.UPDATE, method = { RequestMethod.POST })
+	@RequestMapping(value = ClassifyController.UPDATE, method = { RequestMethod.POST })
     @ResponseBody
-    public ResultCode<Object> update(${entityName} ${entityName?uncap_first}, HttpServletRequest request) {
-		Integer code = ${entityName?uncap_first}Service.update(${entityName?uncap_first});
+    public ResultCode<Object> update(Classify classify, HttpServletRequest request) {
+		Integer code = classifyService.update(classify);
 		if(code==1){
 			return ResultCode.newRightCode("更新成功");
 		}else{
