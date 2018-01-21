@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gosling.dao.article.ArticleDao">
+	
+	<select id="getById" parameterType="Integer" resultType="com.gosling.entity.article.Article">
+		select
+		   *
+		from `article`
+		where `id` = #{id}
+	</select>
+ 
+  <sql id="getCondition">
+        <where>
+        		<if test="queryMap.id != null and queryMap.id !='' ">
+        			and `id` = #{queryMap.id}
+        		</if>
+        		<if test="queryMap.typeId != null and queryMap.typeId !='' ">
+        			and `typeId` = #{queryMap.typeId}
+        		</if>
+        		<if test="queryMap.typePath != null and queryMap.typePath !='' ">
+        			and `typePath` like CONCAT('%', #{queryMap.typePath}, '%')
+        		</if>
+        		<if test="queryMap.title != null and queryMap.title !='' ">
+        			and `title` like CONCAT('%', #{queryMap.title}, '%')
+        		</if>
+        		<if test="queryMap.author != null and queryMap.author !='' ">
+        			and `author` like CONCAT('%', #{queryMap.author}, '%')
+        		</if>
+        		<if test="queryMap.createId != null and queryMap.createId !='' ">
+        			and `createId` = #{queryMap.createId}
+        		</if>
+        		<if test="queryMap.startDate !=null  and queryMap.startDate !='' "> 
+        			and `createTime` &gt; #{queryMap.startDate}
+        		</if>
+				<if test="queryMap.endDate !=null  and queryMap.endDate !='' "> 
+					and `createTime` &lt; #{queryMap.endDate} 
+				</if>
+        </where>
+    </sql>
+    
+   <select id="getArticles" parameterType="java.util.Map" resultType="com.gosling.entity.article.Article">
+		select
+		   *
+		from `article`
+		<include refid="getCondition"/>
+		order by `id` desc
+		<if test="size != null and size &gt; 0">limit #{start},#{size}</if>
+	</select>
+	
+   <select id="getArticlesCount" parameterType="java.util.Map" resultType="Integer">
+		select
+		   count(*)
+		from `article`
+		<include refid="getCondition"/>
+   </select>
+	
+	<insert id="insert" parameterType="com.gosling.entity.article.Article" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into `article`
+		(
+			`typeId`,
+			`typePath`,
+			`title`,
+			`content`,
+			`author`,
+			`createId`,
+			`createTime`
+		)
+		values
+		(
+			#{typeId},
+			#{typePath},
+			#{title},
+			#{content},
+			#{author},
+			#{createId},
+			#{createTime}
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.gosling.entity.article.Article">
+        update `article`
+    	<set>
+			<if test="typeId != null">`typeId`= #{typeId},</if>
+			<if test="typePath != null">`typePath`= #{typePath},</if>
+			<if test="title != null">`title`= #{title},</if>
+			<if test="content != null">`content`= #{content},</if>
+			<if test="author != null">`author`= #{author},</if>
+			<if test="createId != null">`createId`= #{createId},</if>
+			<if test="createTime != null">`createTime`= #{createTime}</if>
+	    </set>
+        where `id` = #{id}
+	</update>
+	
+	<delete id="delById">
+        delete from `article` where `id` = #{id}
+    </delete>
+    
+    <select id="getByProperties" parameterType="java.util.Map" resultType="com.gosling.entity.article.Article">
+   	 	select
+		   *
+		from `article`
+		where 1=1
+		<if test="queryMap.id != null and queryMap.id !='' ">
+   			and `id` = #{queryMap.id}
+   		</if>
+		<if test="queryMap.typeId != null and queryMap.typeId !='' ">
+   			and `typeId` = #{queryMap.typeId}
+   		</if>
+		<if test="queryMap.typePath != null and queryMap.typePath !='' ">
+   			and `typePath` = #{queryMap.typePath}
+   		</if>
+		<if test="queryMap.title != null and queryMap.title !='' ">
+   			and `title` = #{queryMap.title}
+   		</if>
+		<if test="queryMap.content != null and queryMap.content !='' ">
+   			and `content` = #{queryMap.content}
+   		</if>
+		<if test="queryMap.author != null and queryMap.author !='' ">
+   			and `author` = #{queryMap.author}
+   		</if>
+		<if test="queryMap.createId != null and queryMap.createId !='' ">
+   			and `createId` = #{queryMap.createId}
+   		</if>
+		<if test="queryMap.createTime != null and queryMap.createTime !='' ">
+   			and `createTime` = #{queryMap.createTime}
+   		</if>
+    </select>
+    
+</mapper>

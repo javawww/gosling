@@ -209,11 +209,8 @@ public class Template_V1 extends JFrame implements ActionListener {
 		jp.add(dao_template);
 		PromptSupport.setPrompt("daoTemplate.ftl", dao_template);
 		jp.add(new JLabel("service模板文件:", SwingConstants.CENTER));
-		jp.add(service_template);
-		PromptSupport.setPrompt("serviceTemplate.ftl", service_template);
-		jp.add(new JLabel("impl模板文件:", SwingConstants.CENTER));
 		jp.add(impl_template);
-		PromptSupport.setPrompt("implTemplate.ftl", impl_template);
+		PromptSupport.setPrompt("serviceTemplate.ftl", impl_template);
 		jp.add(new JLabel("mapper模板文件:", SwingConstants.CENTER));
 		jp.add(mapper_template);
 		PromptSupport.setPrompt("mapperTemplate.ftl", mapper_template);
@@ -353,26 +350,21 @@ public class Template_V1 extends JFrame implements ActionListener {
 						//模板文件
 						Template tempentity = null;
 						if(!entity_template.getText().equals("")){
-							tempentity = cfg.getTemplate(entity_template.getText());// entity
+							tempentity = cfg.getTemplate(entity_template.getText());// entity 实体类
 							
 						}
 						Template tempmapper = null;
 						if(!mapper_template.getText().equals("")){
-							tempmapper = cfg.getTemplate(mapper_template.getText());// mapper
+							tempmapper = cfg.getTemplate(mapper_template.getText());// mapper 映射文件数据存储
 						}
 						Template tempserviceimpl = null;
 						if(!impl_template.getText().equals("")){
-							tempserviceimpl = cfg.getTemplate(impl_template.getText());// service
-						}
-						Template tempservicei = null;
-						if(!service_template.getText().equals("")){
-							tempservicei = cfg.getTemplate(service_template.getText());// service
+							tempserviceimpl = cfg.getTemplate(impl_template.getText());// service 业务逻辑层
 						}
 						Template tempdao = null;
 						if(!dao_template.getText().equals("")){
-							tempdao = cfg.getTemplate(dao_template.getText());// dao
+							tempdao = cfg.getTemplate(dao_template.getText());// dao 接口持久层
 						}
-
 						//---------------------------------------------
 						//模板生成：映射文件mapper
 						//==============================================
@@ -386,19 +378,6 @@ public class Template_V1 extends JFrame implements ActionListener {
 							tempmapper.process(root, outmapper);
 							outmapper.flush();
 						}
-						
-						//---------------------------------------------
-						//模板生成：业务接口  本套模板不采用此段代码
-						//==============================================
-						if(tempservicei!=null){
-							String serviceFile = getJavaFilePath(rootpackage, diypackage, entityPackage, entityName,
-									"ServiceI.java", "service");
-							Writer outservice = new BufferedWriter(
-									new OutputStreamWriter(new FileOutputStream(serviceFile, false), "UTF-8"));
-							tempservicei.process(root, outservice);
-							outservice.flush();
-						}
-							
 						//---------------------------------------------
 						//模板生成：业务实现类
 						//==============================================
@@ -410,7 +389,6 @@ public class Template_V1 extends JFrame implements ActionListener {
 							tempserviceimpl.process(root, outimpl);
 							outimpl.flush();
 						}
-						
 						//---------------------------------------------
 						//模板生成：实体类
 						//==============================================
@@ -445,7 +423,7 @@ public class Template_V1 extends JFrame implements ActionListener {
 					lbshow.setForeground(new Color(21, 200, 211));
 					lbshow.setText("成功生成增删改查->功能:" + description + "刷新工程查看");
 					//关闭
-					dispose();
+					//dispose();
 				}
 			} catch (ClassNotFoundException e1) {
 				lbshow.setForeground(Color.red);
