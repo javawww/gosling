@@ -139,7 +139,7 @@
 		p:maxUploadSize="5120000" p:maxInMemorySize="512" p:defaultEncoding="UTF-8" />
 	
 	<!-- 拦截器 -->
-	<import resource="spring-authority.xml"/>
+	<!-- <import resource="spring-authority.xml"/> -->
 	
 	<mvc:default-servlet-handler />
 </beans>

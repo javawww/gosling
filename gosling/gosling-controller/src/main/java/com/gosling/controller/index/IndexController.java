@@ -13,11 +13,31 @@ public class IndexController {
 
 	/***静态链接*/
 	public static final String LOGIN = "login.html";//列表页面
+	public static final String INDEX = "index.html";//列表页面
 	
 	
+	/**
+	 * 登陆
+	 * @param request
+	 * @param dataMap
+	 * @return
+	 */
 	@RequestMapping(value = IndexController.LOGIN,method = RequestMethod.GET)
 	public String login(HttpServletRequest request,Map<String, Object> dataMap) {
 		
 		return "index/login";
 	}
+	
+	/**
+	 * 首页
+	 * @param request
+	 * @param dataMap
+	 * @return
+	 */
+	@RequestMapping(value = IndexController.INDEX,method = RequestMethod.GET)
+	public String index(HttpServletRequest request,Map<String, Object> dataMap) {
+		
+		return "index/index";
+	}
+	
 }
