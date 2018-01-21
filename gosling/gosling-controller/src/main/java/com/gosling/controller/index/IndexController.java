@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class IndexController {
 
 	/***静态链接*/
-	public static final String LOGIN = "login.html";//列表页面
-	public static final String INDEX = "index.html";//列表页面
+	public static final String LOGIN = "login.html";//登陆
+	public static final String INDEX = "index.html";//首页
 	
 	
 	/**
